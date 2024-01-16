@@ -7,3 +7,6 @@ Backend:
 
 Frontend:
 - Vite (ReactJS)
+- TanStack Query
+- React Router
+- Bulma (CSS framework)
