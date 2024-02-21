@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -20,26 +19,24 @@ public class UserEntity {
     @Column(name = "id")
     private int id;
 
-    private UUID uuid;
-
     @Column(name = "registered at")
     private Timestamp registrationDate;
 
+    @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
 
-    private boolean isAdmin;
+    private Role role;
 
-
-    public UserEntity(UUID uuid, Timestamp registrationDate, String username, String email, String password, boolean isAdmin) {
-        this.uuid = uuid;
+    public UserEntity(String username, String email, String password) {
         this.registrationDate = new Timestamp(System.currentTimeMillis());
         this.username = username;
         this.email = email;
         this.password = password;
-        this.isAdmin = false;
+        this.role = Role.ROLE_USER;
     }
 }
