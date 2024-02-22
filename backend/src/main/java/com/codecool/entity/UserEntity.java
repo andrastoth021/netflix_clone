@@ -32,11 +32,11 @@ public class UserEntity {
 
     private Role role;
 
-    public UserEntity(String username, String email, String password) {
+    public UserEntity(String username, String email, String password, Role role) {
         this.registrationDate = new Timestamp(System.currentTimeMillis());
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = Role.ROLE_USER;
+        this.role = role;
     }
 }
