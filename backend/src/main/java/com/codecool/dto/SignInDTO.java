@@ -1,4 +1,4 @@
 package com.codecool.dto;
 
-public record SignInDTO(String username, String password) {
+public record SignInDTO(String email, String password) {
 }

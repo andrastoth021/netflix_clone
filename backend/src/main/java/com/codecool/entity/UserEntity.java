@@ -1,11 +1,13 @@
 package com.codecool.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -22,7 +24,6 @@ public class UserEntity {
     @Column(name = "registered at")
     private Timestamp registrationDate;
 
-    @Column(unique = true)
     private String username;
 
     @Column(unique = true)
@@ -30,13 +31,17 @@ public class UserEntity {
 
     private String password;
 
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role_join",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
-    public UserEntity(String username, String email, String password, Role role) {
+    public UserEntity(String username, String email, String password, Set<Role> roles) {
         this.registrationDate = new Timestamp(System.currentTimeMillis());
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
     }
 }
