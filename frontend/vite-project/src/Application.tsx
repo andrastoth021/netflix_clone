@@ -1,5 +1,9 @@
 import './index.css';
 import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import {
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -9,6 +13,14 @@ import {
   Home,
   ErrorPage,
 } from "@/pages/index.ts";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+});
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route errorElement={<ErrorPage />}>
@@ -20,8 +32,10 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 const Application = () => {
   return (
-    <RouterProvider router={router} />
-  )
-}
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
+};
 
 export default Application
