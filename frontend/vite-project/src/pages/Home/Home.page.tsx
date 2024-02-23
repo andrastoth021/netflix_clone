@@ -1,5 +1,4 @@
 import { AuthPanel } from "@/components/authentication/AuthPanel.tsx";
-import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -27,23 +26,6 @@ const Home = () => {
                             </p>
                         </div>
                         <AuthPanel />
-                        <p className="px-8 text-center text-sm text-muted-foreground">
-                            By clicking continue, you agree to our{" "}
-                            <Link
-                                to="/terms-of-service"
-                                className="underline underline-offset-4 hover:text-primary"
-                            >
-                                Terms of Service
-                            </Link>{" "}
-                            and{" "}
-                            <Link
-                                to="/privacy-policy"
-                                className="underline underline-offset-4 hover:text-primary"
-                            >
-                                Privacy Policy
-                            </Link>
-                            .
-                        </p>
                     </div>
                 </div>
             </div>
