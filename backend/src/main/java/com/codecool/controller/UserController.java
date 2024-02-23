@@ -48,8 +48,7 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody RegisterDTO registerDTO) {
         if (userService.findByEmail(registerDTO.email()).isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
-                "Oops! The email address you've chosen is already registered. \uD83D\uDE05\n" +
-                "Don't worry, it happens to the best of us. You can either try logging in with this email or use a different one. \uD83D\uDE80");
+                "The email address you've chosen is already registered!");
         }
 
         Role roles = roleService.findByName("ROLE_USER");
