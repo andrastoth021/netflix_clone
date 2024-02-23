@@ -20,7 +20,7 @@ import {
 export const AuthPanel = () => {
 
     return (
-        <>
+        <form>
             <Tabs defaultValue="signup">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="signup">Sign up</TabsTrigger>
@@ -37,19 +37,19 @@ export const AuthPanel = () => {
                         <CardContent className="space-y-2">
                             <div className="space-y-1">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" placeholder="example@example.com" type={"email"}/>
+                                <Input id="email" placeholder="example@example.com" type={"email"} required={true} />
                             </div>
                             <div className="space-y-1">
                                 <Label htmlFor="username">Username</Label>
-                                <Input id="username" placeholder="YourUsername"/>
+                                <Input id="username" placeholder="YourUsername" required={true} />
                             </div>
                             <div className="space-y-1">
                                 <Label htmlFor="password">Password</Label>
-                                <Input id="password" placeholder="YourPassword" type={"password"}/>
+                                <Input id="password" placeholder="YourPassword" type={"password"} required={true} />
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button>Sign Up!</Button>
+                            <Button type={"submit"}>Sign Up!</Button>
                         </CardFooter>
                     </Card>
                 </TabsContent>
@@ -64,20 +64,20 @@ export const AuthPanel = () => {
                         <CardContent className="space-y-2">
                             <div className="space-y-1">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" placeholder="example@example.com" type={"email"}/>
+                                <Input id="email" placeholder="example@example.com" type={"email"} required={true} />
                             </div>
                             <div className="space-y-1">
                                 <Label htmlFor="password">Password</Label>
-                                <Input id="password" placeholder="YourPassword" type={"password"}/>
+                                <Input id="password" placeholder="YourPassword" type={"password"} required={true} />
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button>Log In!</Button>
+                            <Button type={"submit"}>Log In!</Button>
                         </CardFooter>
                     </Card>
                 </TabsContent>
             </Tabs>
-            <p className="px-8 text-center text-sm text-muted-foreground">
+            <p className="px-8 mt-2 text-center text-sm text-muted-foreground">
                 By clicking continue, you agree to our{" "}
                 <Link
                     to="/terms-of-service"
@@ -94,6 +94,6 @@ export const AuthPanel = () => {
                 </Link>
                 .
             </p>
-        </>
+        </form>
     )
 }
