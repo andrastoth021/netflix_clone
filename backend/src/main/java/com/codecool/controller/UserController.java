@@ -25,14 +25,10 @@ import java.util.List;
 @RequestMapping(path = "/api/user")
 public class UserController {
     private final UserService userService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtils jwtUtils;
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    public UserController(UserService userService, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.authenticationManager = authenticationManager;
-        this.jwtUtils = jwtUtils;
     }
 
     @PostMapping("/register")
@@ -41,34 +37,13 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@RequestBody SignInDTO loginRequest) {
-        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password());
-        Authentication authentication = authenticationManager.authenticate(auth);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String jwt = jwtUtils.generateJwtToken(authentication);
-        User userDetails = (User) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList();
-
-        UserEntity userEntity = userService.findByEmail(loginRequest.email()).orElseThrow(() -> new UsernameNotFoundException(loginRequest.email()));
-
-        logger.info("User called " + userEntity.getUsername() + " signed in successfully!");
-        return ResponseEntity
-                .ok(new JwtResponse(jwt, userEntity.getUsername(), roles));
+    public ResponseEntity<?> authenticateUser(@RequestBody SignInDTO signInDTO) {
+        return userService.authenticateUser(signInDTO);
     }
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER')")
-    public String me() {
-        User user = (User) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-
-        UserEntity userEntity = userService.findByEmail(user.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException(user.getUsername()));
-
-        return "Hello " + userEntity.getUsername();
+    public String me() { // Test endpoint
+        return userService.me();
     }
 }
