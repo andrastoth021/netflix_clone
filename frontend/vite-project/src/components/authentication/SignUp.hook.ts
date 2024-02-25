@@ -43,7 +43,8 @@ export const useSignUp = () => {
             const data = await axios.post('/api/user/register', {
                 email: payload.email,
                 username: payload.username,
-                password: payload.password
+                password: payload.password,
+                passwordRepeat: payload.passwordRepeat
             });
             console.log(data);
             successfulToast();

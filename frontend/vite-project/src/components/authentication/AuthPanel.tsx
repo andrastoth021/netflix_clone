@@ -41,28 +41,37 @@ export const AuthPanel = () => {
                                 <div className="space-y-1">
                                     <Label htmlFor="email">Email</Label>
                                     <Input id="email"
-                                       name={"email"}
-                                       type={"email"}
-                                       placeholder="example@example.com"
-                                       required={true}
+                                           name={"email"}
+                                           type={"email"}
+                                           placeholder="example@example.com"
+                                           required={true}
                                     />
                                 </div>
                                 <div className="space-y-1">
                                     <Label htmlFor="username">Username</Label>
                                     <Input id="username"
-                                       name={"username"}
-                                       type={"username"}
-                                       placeholder="YourUsername"
-                                       required={true}
+                                           name={"username"}
+                                           type={"username"}
+                                           placeholder="YourUsername"
+                                           required={true}
                                     />
                                 </div>
                                 <div className="space-y-1">
                                     <Label htmlFor="password">Password</Label>
                                     <Input id="password"
-                                        name={"password"}
-                                        type={"password"}
-                                        placeholder="YourPassword"
-                                        required={true}
+                                           name={"password"}
+                                           type={"password"}
+                                           placeholder="YourPassword"
+                                           required={true}
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="passwordRepeat">Confirm password</Label>
+                                    <Input id="passwordRepeat"
+                                           name={"passwordRepeat"}
+                                           type={"password"}
+                                           placeholder="YourPasswordAgain"
+                                           required={true}
                                     />
                                 </div>
                             </CardContent>
@@ -77,7 +86,7 @@ export const AuthPanel = () => {
                         <CardHeader>
                             <CardTitle>Sign into your account</CardTitle>
                             <CardDescription>
-                                Please sign in to continue right where you left off.
+                            Please sign in to continue right where you left off.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-2">

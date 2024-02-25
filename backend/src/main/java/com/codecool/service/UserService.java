@@ -35,6 +35,10 @@ public class UserService {
     }
 
     public ResponseEntity<?> registerUser(RegisterDTO registerDTO) {
+        if (!registerDTO.password().equals(registerDTO.passwordRepeat())) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    "The two passwords don't match!");
+        }
         if (findByEmail(registerDTO.email()).isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
                 "The email address you've chosen is already registered!");
