@@ -56,7 +56,7 @@ public class UserService {
     public ResponseEntity<?> registerUser(RegisterDTO registerDTO) {
         if (!registerDTO.password().equals(registerDTO.passwordRepeat())) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
-                    "The two passwords don't match!");
+                "Passwords do not match. Please ensure both entries are identical.");
         }
         if (findByEmail(registerDTO.email()).isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
@@ -71,22 +71,27 @@ public class UserService {
     }
 
     public ResponseEntity<?> authenticateUser(SignInDTO signInDTO) {
-        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(signInDTO.email(), signInDTO.password());
-        Authentication authentication = authenticationManager.authenticate(auth);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(signInDTO.email(), signInDTO.password());
+            Authentication authentication = authenticationManager.authenticate(auth);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtUtils.generateJwtToken(authentication);
-        User userDetails = (User) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList();
+            String jwt = jwtUtils.generateJwtToken(authentication);
+            User userDetails = (User) authentication.getPrincipal();
+            List<String> roles = userDetails.getAuthorities()
+                    .stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .toList();
 
-        UserEntity userEntity = findByEmail(signInDTO.email()).orElseThrow(() -> new UsernameNotFoundException(signInDTO.email()));
+            UserEntity userEntity = findByEmail(signInDTO.email()).orElseThrow(() -> new UsernameNotFoundException(signInDTO.email()));
 
-        logger.info("User called " + userEntity.getUsername() + " signed in successfully!");
-        return ResponseEntity
-                .ok(new JwtResponse(jwt, userEntity.getUsername(), roles));
+            logger.info("User called " + userEntity.getUsername() + " signed in successfully!");
+            return ResponseEntity
+                    .ok(new JwtResponse(jwt, userEntity.getUsername(), roles));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                "The username and password you entered do not match. Please check your credentials and try again.");
+        }
     }
 
     public String me() {
