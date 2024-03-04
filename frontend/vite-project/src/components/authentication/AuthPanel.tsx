@@ -17,9 +17,11 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs.tsx"
 import { useSignUp } from "./SignUp.hook.ts";
+import { useLogIn } from "./LogIn.hook.ts";
 
 export const AuthPanel = () => {
     const { handleSignUp } = useSignUp();
+    const { handleLogIn } = useLogIn();
 
     return (
         <>
@@ -82,27 +84,39 @@ export const AuthPanel = () => {
                     </form>
                 </TabsContent>
                 <TabsContent value="login">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Sign into your account</CardTitle>
-                            <CardDescription>
-                            Please sign in to continue right where you left off.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <div className="space-y-1">
-                                <Label htmlFor="email">Email</Label>
-                                <Input id="email" placeholder="example@example.com" type={"email"} required={true} />
-                            </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="password">Password</Label>
-                                <Input id="password" placeholder="YourPassword" type={"password"} required={true} />
-                            </div>
-                        </CardContent>
-                        <CardFooter>
-                            <Button type={"submit"}>Log In!</Button>
-                        </CardFooter>
-                    </Card>
+                    <form onSubmit={(e) => handleLogIn(e)}>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Sign into your account</CardTitle>
+                                <CardDescription>
+                                    Please sign in to continue right where you left off.
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                                <div className="space-y-1">
+                                    <Label htmlFor="email">Email</Label>
+                                    <Input id="email"
+                                           name={"email"}
+                                           type={"email"}
+                                           placeholder="example@example.com"
+                                           required={true}
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Input id="password"
+                                           name={"password"}
+                                           type={"password"}
+                                           placeholder="YourPassword"
+                                           required={true}
+                                    />
+                                </div>
+                            </CardContent>
+                            <CardFooter>
+                                <Button type={"submit"}>Log In!</Button>
+                            </CardFooter>
+                        </Card>
+                    </form>
                 </TabsContent>
             </Tabs>
             <p className="px-8 mt-2 text-center text-sm text-muted-foreground">
