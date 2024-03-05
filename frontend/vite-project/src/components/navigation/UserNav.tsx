@@ -14,7 +14,7 @@ import {
     // DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getLocalStorageItem } from "@/utilities/getLocalStorageItem.ts";
 import { useEffect, useState } from "react";
 import { Icons } from "@/components/icons.tsx";
@@ -60,13 +60,15 @@ export function UserNav() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                        <div className="flex items-center">
-                            <Icons.wrench className="h-4 w-4" />
-                            <p className="ml-1">Manage</p>
-                        </div>
-                        {/*<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>*/}
-                    </DropdownMenuItem>
+                    <Link to={'/user/manage'}>
+                        <DropdownMenuItem>
+                            <div className="flex items-center">
+                                <Icons.wrench className="h-4 w-4" />
+                                <p className="ml-1">Manage</p>
+                            </div>
+                            {/*<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>*/}
+                        </DropdownMenuItem>
+                    </Link>
                 </DropdownMenuGroup>
                     <DropdownMenuItem className="font-bold text-destructive" onClick={signOut}>
                         <div className="flex items-center">

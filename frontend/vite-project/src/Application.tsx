@@ -13,6 +13,7 @@ import {
   Home,
   LandingPage,
   ErrorPage,
+  ProfilePage,
 } from "@/pages/index.ts";
 
 const queryClient = new QueryClient({
@@ -30,6 +31,9 @@ const router = createBrowserRouter(createRoutesFromElements(
     </Route>
     <Route path={'/landing-page'}>
       <Route index element={<LandingPage />} />
+    </Route>
+    <Route path={'/user/manage'}>
+      <Route index element={<ProfilePage />}></Route>
     </Route>
   </Route>
 ));
