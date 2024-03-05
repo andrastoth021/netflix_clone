@@ -44,6 +44,13 @@ export const useLogIn = () => {
                 email: payload.email,
                 password: payload.password
             });
+
+            const userData = {
+                userName: data.userName,
+                email: data.email,
+                dateOfReg: data.dateOfRegistration,
+            };
+            window.localStorage.setItem('userData', JSON.stringify(userData));
             window.localStorage.setItem('token', data.jwt);
             successfulToast();
             navigate('/landing-page');
