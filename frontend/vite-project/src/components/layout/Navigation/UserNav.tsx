@@ -2,8 +2,8 @@ import {
     Avatar,
     AvatarFallback,
     AvatarImage,
-} from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/avatar.tsx"
+import { Button } from "@/components/ui/button.tsx"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
     DropdownMenuSeparator,
     // DropdownMenuShortcut,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu.tsx"
 import { Link, useNavigate } from "react-router-dom";
 import { getLocalStorageItem } from "@/utilities/getLocalStorageItem.ts";
 import { useEffect, useState } from "react";

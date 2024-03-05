@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils.ts"
 import React from "react";
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area.tsx"
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -9,9 +9,9 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu.tsx"
 import { Link } from "react-router-dom";
-import { Icons } from "@/components/icons"
+import { Icons } from "@/components/icons.tsx"
 
 /*const components: { title: string; href: string; description: string }[] = [
     {
