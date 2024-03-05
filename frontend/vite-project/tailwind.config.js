@@ -19,6 +19,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         authWall: "url('/src/assets/authentication-city-neon-wallpaper.jpg')",
+        categoryWall: "url('/src/assets/category-wallpaper.jpg')",
+        exploreWall: "url('/src/assets/explore-wallpaper.jpg')",
       },
       colors: {
         border: "hsl(var(--border))",
