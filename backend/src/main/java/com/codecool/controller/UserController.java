@@ -1,5 +1,6 @@
 package com.codecool.controller;
 
+import com.codecool.dto.ProfileResponse;
 import com.codecool.dto.RegisterDTO;
 import com.codecool.dto.SignInDTO;
 import com.codecool.service.UserService;
@@ -31,7 +32,7 @@ public class UserController {
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER')")
-    public String me() { // Test endpoint
-        return userService.me();
+    public ResponseEntity<ProfileResponse> me() {
+        return userService.getProfileData();
     }
 }

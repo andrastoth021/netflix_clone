@@ -1,6 +1,7 @@
 package com.codecool.service;
 
 import com.codecool.controller.UserController;
+import com.codecool.dto.ProfileResponse;
 import com.codecool.dto.RegisterDTO;
 import com.codecool.dto.SignInDTO;
 import com.codecool.entity.Role;
@@ -94,13 +95,18 @@ public class UserService {
         }
     }
 
-    public String me() {
+    public ResponseEntity<ProfileResponse> getProfileData() {
         User user = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
 
         UserEntity userEntity = findByEmail(user.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(user.getUsername()));
 
-        return "Hello " + userEntity.getUsername();
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(new ProfileResponse(
+                userEntity.getRegistrationDate(),
+                userEntity.getUsername(),
+                userEntity.getEmail())
+            );
     }
 }
