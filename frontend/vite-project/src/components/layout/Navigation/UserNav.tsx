@@ -18,9 +18,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { getLocalStorageItem } from "@/utilities/getLocalStorageItem.ts";
 import { useEffect, useState } from "react";
 import { Icons } from "@/components/icons.tsx";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function UserNav() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
 
@@ -36,6 +38,7 @@ export function UserNav() {
     const signOut = () => {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('userData');
+        queryClient.removeQueries();
         navigate('/');
     };
 
