@@ -1,11 +1,11 @@
 import Home from './Home';
-import LandingPage from './LandingPage';
+import ExplorePage from './ExplorePage';
 import ErrorPage from './ErrorPage';
 import ProfilePage from './ProfilePage';
 
 export {
     Home,
-    LandingPage,
+    ExplorePage,
     ErrorPage,
     ProfilePage
 };

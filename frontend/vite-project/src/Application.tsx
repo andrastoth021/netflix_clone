@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import {
   Home,
-  LandingPage,
+  ExplorePage,
   ErrorPage,
   ProfilePage,
 } from "@/pages/index.ts";
@@ -32,8 +32,8 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path={'/'}>
       <Route index element={<Home />} />
     </Route>
-    <Route path={'/landing-page'} element={<Layout />}>
-      <Route index element={<LandingPage />} />
+    <Route path={'/explore'} element={<Layout />}>
+      <Route index element={<ExplorePage />} />
     </Route>
     <Route path={'/user/manage'} element={<Layout />}>
       <Route index element={<ProfilePage />} />
