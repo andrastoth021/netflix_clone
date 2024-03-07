@@ -165,11 +165,9 @@ export function MainNav({
                                     <div className="p-1">
                                         {/*<h4 className="mb-4 text-sm italic font-medium leading-none">Scroll to see more</h4>*/}
                                         {categories.map((category) => (
-                                            <>
-                                                <Link to={"/show/category/" + category.toLowerCase()}>
-                                                    <ListItem key={category} title={category} />
-                                                </Link>
-                                            </>
+                                            <Link key={category.toLowerCase()} to={"/show/category/" + category.toLowerCase()}>
+                                                <ListItem title={category} />
+                                            </Link>
                                         ))}
                                     </div>
                                 </ScrollArea>
