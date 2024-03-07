@@ -2,8 +2,8 @@ import {
     Avatar,
     AvatarFallback,
     AvatarImage,
-} from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/avatar.tsx"
+import { Button } from "@/components/ui/button.tsx"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,14 +13,17 @@ import {
     DropdownMenuSeparator,
     // DropdownMenuShortcut,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useNavigate } from "react-router-dom";
+} from "@/components/ui/dropdown-menu.tsx"
+import { Link, useNavigate } from "react-router-dom";
 import { getLocalStorageItem } from "@/utilities/getLocalStorageItem.ts";
 import { useEffect, useState } from "react";
 import { Icons } from "@/components/icons.tsx";
+import { useQueryClient } from "@tanstack/react-query";
+import {toast} from "sonner";
 
 export function UserNav() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
 
@@ -33,9 +36,22 @@ export function UserNav() {
         }
     }, []);
 
+    const successfulToast = () => {
+        // Goodbye for now, but remember, the best adventures are yet to come. We look forward to seeing you again soon!
+        toast("Goodbye for now!", {
+            description: `But remember, the best adventures are yet to come! See you soon!`,
+            action: {
+                label: "Close",
+                onClick: () => console.log("Toast closed"),
+            },
+        })
+    }
+
     const signOut = () => {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('userData');
+        queryClient.removeQueries();
+        successfulToast();
         navigate('/');
     };
 
@@ -60,13 +76,15 @@ export function UserNav() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                        <div className="flex items-center">
-                            <Icons.wrench className="h-4 w-4" />
-                            <p className="ml-1">Manage</p>
-                        </div>
-                        {/*<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>*/}
-                    </DropdownMenuItem>
+                    <Link to={'/user/manage'}>
+                        <DropdownMenuItem>
+                            <div className="flex items-center">
+                                <Icons.wrench className="h-4 w-4" />
+                                <p className="ml-1">Manage</p>
+                            </div>
+                            {/*<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>*/}
+                        </DropdownMenuItem>
+                    </Link>
                 </DropdownMenuGroup>
                     <DropdownMenuItem className="font-bold text-destructive" onClick={signOut}>
                         <div className="flex items-center">

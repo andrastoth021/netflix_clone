@@ -11,9 +11,13 @@ import {
 } from "react-router-dom";
 import {
   Home,
-  LandingPage,
+  ExplorePage,
   ErrorPage,
+  ProfilePage,
 } from "@/pages/index.ts";
+import {
+  Layout,
+} from '@/components/layout';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,8 +32,11 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path={'/'}>
       <Route index element={<Home />} />
     </Route>
-    <Route path={'/landing-page'}>
-      <Route index element={<LandingPage />} />
+    <Route path={'/explore'} element={<Layout />}>
+      <Route index element={<ExplorePage />} />
+    </Route>
+    <Route path={'/user/manage'} element={<Layout />}>
+      <Route index element={<ProfilePage />} />
     </Route>
   </Route>
 ));
