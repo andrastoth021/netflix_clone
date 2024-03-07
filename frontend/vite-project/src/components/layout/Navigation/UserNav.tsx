@@ -19,6 +19,7 @@ import { getLocalStorageItem } from "@/utilities/getLocalStorageItem.ts";
 import { useEffect, useState } from "react";
 import { Icons } from "@/components/icons.tsx";
 import { useQueryClient } from "@tanstack/react-query";
+import {toast} from "sonner";
 
 export function UserNav() {
     const navigate = useNavigate();
@@ -35,10 +36,22 @@ export function UserNav() {
         }
     }, []);
 
+    const successfulToast = () => {
+        // Goodbye for now, but remember, the best adventures are yet to come. We look forward to seeing you again soon!
+        toast("Goodbye for now!", {
+            description: `But remember, the best adventures are yet to come! See you soon!`,
+            action: {
+                label: "Close",
+                onClick: () => console.log("Toast closed"),
+            },
+        })
+    }
+
     const signOut = () => {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('userData');
         queryClient.removeQueries();
+        successfulToast();
         navigate('/');
     };
 

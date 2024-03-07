@@ -53,7 +53,7 @@ export const useLogIn = () => {
             window.localStorage.setItem('userData', JSON.stringify(userData));
             window.localStorage.setItem('token', data.jwt);
             successfulToast();
-            navigate('/landing-page');
+            navigate('/explore');
         } catch (error) {
             let errorMessage: string;
             if (axios.isAxiosError(error)) {
