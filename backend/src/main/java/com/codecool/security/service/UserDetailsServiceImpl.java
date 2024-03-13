@@ -1,7 +1,7 @@
 package com.codecool.security.service;
 
-import com.codecool.entity.Role;
-import com.codecool.entity.UserEntity;
+import com.codecool.entity.user.Role;
+import com.codecool.entity.user.UserEntity;
 import com.codecool.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

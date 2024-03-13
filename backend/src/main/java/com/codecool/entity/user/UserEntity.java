@@ -1,6 +1,5 @@
-package com.codecool.entity;
+package com.codecool.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
