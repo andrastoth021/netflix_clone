@@ -1,6 +1,6 @@
 package com.codecool.service;
 
-import com.codecool.entity.Role;
+import com.codecool.entity.user.Role;
 import com.codecool.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 

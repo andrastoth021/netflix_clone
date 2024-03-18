@@ -12,8 +12,9 @@ import {
 import {
   Home,
   ExplorePage,
-  ErrorPage,
+  DetailsPage,
   ProfilePage,
+  ErrorPage,
 } from "@/pages/index.ts";
 import {
   Layout,
@@ -37,6 +38,9 @@ const router = createBrowserRouter(createRoutesFromElements(
     </Route>
     <Route path={'/user/manage'} element={<Layout />}>
       <Route index element={<ProfilePage />} />
+    </Route>
+    <Route path={'/movie/details/:id'} element={<Layout />}>
+      <Route index element={<DetailsPage />} />
     </Route>
   </Route>
 ));

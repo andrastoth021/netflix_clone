@@ -1,4 +1,4 @@
-package com.codecool.entity;
+package com.codecool.entity.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

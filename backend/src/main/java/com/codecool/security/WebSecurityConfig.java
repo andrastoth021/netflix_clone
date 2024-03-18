@@ -63,10 +63,9 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("api/user/**").permitAll()
-                                //.requestMatchers("team/**").hasRole("USER")
-                                .requestMatchers("/error").permitAll()
-                                .anyRequest().authenticated()
-
+                            .requestMatchers("api/movie/**").hasRole("USER")
+                            .requestMatchers("/error").permitAll()
+                        .anyRequest().authenticated()
                 );
 
         http.authenticationProvider(authenticationProvider());
