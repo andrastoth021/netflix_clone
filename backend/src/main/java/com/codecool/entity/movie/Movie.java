@@ -31,6 +31,7 @@ public class Movie {
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "short_description")
@@ -49,7 +50,10 @@ public class Movie {
     @Column(name = "background_src")
     private String backgroundSrc;
 
-    public Movie(UUID uuid, Set<Category> categories, String title, String description, String shortDescription, int releaseYear, int pegi, int runtime, String posterSrc, String backgroundSrc) {
+    @Column(name = "video_src")
+    private String videoSrc;
+
+    public Movie(UUID uuid, Set<Category> categories, String title, String description, String shortDescription, int releaseYear, int pegi, int runtime, String posterSrc, String backgroundSrc, String videoSrc) {
         this.uuid = UUID.randomUUID();
         this.categories = new HashSet<>(categories);
         this.title = title;
@@ -60,5 +64,6 @@ public class Movie {
         this.runtime = runtime;
         this.posterSrc = posterSrc;
         this.backgroundSrc = backgroundSrc;
+        this.videoSrc = videoSrc;
     }
 }

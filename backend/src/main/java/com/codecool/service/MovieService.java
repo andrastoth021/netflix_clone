@@ -37,6 +37,7 @@ public class MovieService {
             }
 
             result.add(new MovieResponse(
+                movie.getUuid(),
                 categoryNames,
                 movie.getTitle(),
                 movie.getDescription(),
@@ -45,7 +46,8 @@ public class MovieService {
                 movie.getPegi(),
                 movie.getRuntime(),
                 movie.getPosterSrc(),
-                movie.getBackgroundSrc()
+                movie.getBackgroundSrc(),
+                movie.getVideoSrc()
             ));
         });
 
@@ -67,6 +69,7 @@ public class MovieService {
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new MovieResponse(
+                                    movie.get().getUuid(),
                                     categoryNames,
                                     movie.get().getTitle(),
                                     movie.get().getDescription(),
@@ -75,7 +78,8 @@ public class MovieService {
                                     movie.get().getPegi(),
                                     movie.get().getRuntime(),
                                     movie.get().getPosterSrc(),
-                                    movie.get().getBackgroundSrc()
+                                    movie.get().getBackgroundSrc(),
+                                    movie.get().getVideoSrc()
                             )
                     );
         } else {

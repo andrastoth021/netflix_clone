@@ -1,8 +1,10 @@
 package com.codecool.dto.movie;
 
 import java.util.Set;
+import java.util.UUID;
 
 public record MovieResponse(
+    UUID uuid,
     Set<String> categoryNames,
     String title,
     String description,
@@ -11,5 +13,6 @@ public record MovieResponse(
     int pegi,
     int runtime,
     String posterSrc,
-    String backgroundSrc
+    String backgroundSrc,
+    String videoSrc
 ) { }
