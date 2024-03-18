@@ -65,10 +65,6 @@ const DetailsPage = () => {
         else return `${hours} hours ${minutes} minutes`;
     }
 
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
     return (
         <>
             <div className="relative h-[66vh] bg-cover bg-center"

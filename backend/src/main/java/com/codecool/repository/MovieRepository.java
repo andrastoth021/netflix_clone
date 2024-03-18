@@ -14,4 +14,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     Set<Movie> findAllMovie();
 
     Optional<Movie> findMovieByUuid(UUID uuid);
+
+    // Set<Movie> findAllByTitleOrDescriptionOrShortDescription(String searchQuery);
+    Set<Movie> findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrShortDescriptionContainingIgnoreCase(String title, String description, String short_desc);
 }

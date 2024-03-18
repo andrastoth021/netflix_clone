@@ -13,6 +13,7 @@ import {
   Home,
   ExplorePage,
   DetailsPage,
+  SearchPage,
   ProfilePage,
   ErrorPage,
 } from "@/pages/index.ts";
@@ -35,6 +36,9 @@ const router = createBrowserRouter(createRoutesFromElements(
     </Route>
     <Route path={'/explore'} element={<Layout />}>
       <Route index element={<ExplorePage />} />
+    </Route>
+    <Route path={'/show/search'} element={<Layout />}>
+      <Route index element={<SearchPage />} />
     </Route>
     <Route path={'/user/manage'} element={<Layout />}>
       <Route index element={<ProfilePage />} />
