@@ -12,6 +12,8 @@ import { CardTitle } from "@/components/ui/card.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Badge } from "@/components/ui/badge.tsx";
+import Plyr from 'plyr-react';
+import "plyr/dist/plyr.css";
 
 interface Movie {
     uuid: string,
@@ -63,6 +65,10 @@ const DetailsPage = () => {
         else return `${hours} hours ${minutes} minutes`;
     }
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <>
             <div className="relative h-[66vh] bg-cover bg-center"
@@ -102,11 +108,38 @@ const DetailsPage = () => {
                     </div>
                 </div>
             </div>
-            <div className="p-8 flex flex-col justify-center items-center">
-                <video width="80%" controls>
-                    <source src={data && data.videoSrc} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+            <div className="p-10 flex flex-col justify-center items-center">
+                <Plyr
+                    source={{
+                        type: "video",
+                        sources: [
+                            {
+                                // @ts-ignore
+                                src: `${data.videoSrc}`,
+                                type: "video/mp4",
+                            },
+                        ],
+                    }}
+                    options={{
+                        controls: [
+                            "play-large",
+                            "play",
+                            // "rewind",
+                            // "fast-forward",
+                            "progress",
+                            "current-time",
+                            "mute",
+                            "volume",
+                            "captions",
+                            "settings",
+                            // "pip",
+                            "fullscreen"
+                        ],
+                        captions: { active: true, language: "auto", update: true },
+                        previewThumbnails: { enabled: false, src: "" }
+                    }}
+
+                />
             </div>
         </>
     )
