@@ -25,4 +25,9 @@ public class MovieController {
         return movieService.getMovieDetails(uuid);
     }
 
+    @GetMapping("/search/{query}")
+    public ResponseEntity<?> searchMovies(@PathVariable String query) {
+        return movieService.searchMovies(query);
+    }
+
 }

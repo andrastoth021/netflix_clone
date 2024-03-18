@@ -86,4 +86,36 @@ public class MovieService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    public ResponseEntity<?> searchMovies(String searchQuery) {
+        Set<Movie> movieSet = movieRepository.findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrShortDescriptionContainingIgnoreCase(searchQuery, searchQuery, searchQuery);
+        Set<MovieResponse> result = new HashSet<>();
+
+        movieSet.forEach(movie -> {
+            Set<String> categoryNames = new HashSet<>();
+
+            for (Category cat : movie.getCategories()) {
+                Category category = categoryRepository.findCategoryById(cat.getId());
+                categoryNames.add(category.getName());
+            }
+
+            result.add(new MovieResponse(
+                    movie.getUuid(),
+                    categoryNames,
+                    movie.getTitle(),
+                    movie.getDescription(),
+                    movie.getShortDescription(),
+                    movie.getReleaseYear(),
+                    movie.getPegi(),
+                    movie.getRuntime(),
+                    movie.getPosterSrc(),
+                    movie.getBackgroundSrc(),
+                    movie.getVideoSrc()
+            ));
+        });
+
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new MultipleMovieResponse(result));
+    }
 }
