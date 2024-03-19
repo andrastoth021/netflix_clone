@@ -56,11 +56,12 @@ export default function SearchPage() {
                     <Button type="submit">Search</Button>
                 </form>
                 <Separator className="m-10" />
-                <div>
-                    { movies.length < 1 ? <></> : movies.map((movie: Movie) => {
+                <div
+                    className="grid md:grid-flow-col md:justify-start space-x-8 space-y-8 min-h-[140px] w-full place-items-center md:place-items-start overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+                    {movies.length < 1 ? <></> : movies.map((movie: Movie) => {
                         return (
                             <Link to={`/movie/details/${movie.uuid}`}>
-                                <MovieCover key={movie.uuid} poster={movie.posterSrc} />
+                                <MovieCover key={movie.uuid} poster={movie.posterSrc}/>
                             </Link>
                         )
                     })}

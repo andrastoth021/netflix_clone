@@ -47,7 +47,7 @@ const ExplorePage = () => {
     return (
         <>
             <div
-                className="grid min-h-[140px] w-full place-items-center md:place-items-start overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+                className="grid md:grid-flow-col md:justify-start space-x-8 space-y-8 min-h-[140px] w-full place-items-center md:place-items-start overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
                 { movies.length < 1 && <Loading /> }
                 { movies && movies.map((movie: Movie) => {
                     return (
