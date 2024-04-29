@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  db:
+    container_name: postgresql
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./init.sql/:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - netflix_network
+
+  backend:
+    container_name: netflix-backend
+    env_file:
+      - .env
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    networks:
+      - netflix_network
+
+  frontend:
+    container_name: netflix-frontend
+    build:
+      context: ./frontend/vite-project
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - netflix_network
+
+networks:
+  netflix_network:
+    driver: bridge
+
+volumes:
+  db-data:
