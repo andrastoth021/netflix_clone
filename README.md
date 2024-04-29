@@ -22,6 +22,12 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#authors">Authors</a></li>
   </ol>
@@ -52,6 +58,51 @@
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Installation
+
+Before installing the project, make sure you have Docker installed on your machine.
+Docker can be downloaded and installed from the official Docker website. Here are the links to download Docker for different operating systems:
+
+[Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/)
+
+[Docker Desktop for Mac](https://docs.docker.com/desktop/install/mac-install/)
+
+[Docker Desktop for Linux](https://docs.docker.com/desktop/install/linux-install/)
+
+
+After downloading and installing Docker, follow these steps to install and run the project:
+
+Clone the repository to your local machine.
+
+Navigate to the root directory of the project.
+
+Create your `.env` file with the help of the provided `.env template` file.
+
+```
+DB_HOST=postgresql
+DB_PORT=5432
+DB_NAME=
+DB_USERNAME=
+DB_PASSWORD=
+```
+
+Fill it out with the preferred data then save it with the following name: `.env`.
+
+Finally, start the Docker containers using Docker Compose. From the root directory of the project, run:
+
+```
+docker-compose up
+```
+
+This will build and start the Docker containers defined in the docker-compose.yml file.
+
+Please note that the frontend and backend are not fully connected yet as the project is still under development.
 
 
 
