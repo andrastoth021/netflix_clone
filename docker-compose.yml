@@ -16,7 +16,7 @@ services:
       - netflix_network
 
   backend:
-    container_name: netflix_backend
+    container_name: netflix-backend
     env_file:
       - .env
     build:
@@ -30,7 +30,7 @@ services:
       - netflix_network
 
   frontend:
-    container_name: netflix_frontend
+    container_name: netflix-frontend
     build:
       context: ./frontend/vite-project
       dockerfile: Dockerfile
