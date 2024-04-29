@@ -6,6 +6,7 @@ import com.codecool.dto.RegisterDTO;
 import com.codecool.dto.SignInDTO;
 import com.codecool.entity.user.Role;
 import com.codecool.entity.user.UserEntity;
+import com.codecool.exception.DuplicatedException;
 import com.codecool.model.JwtResponse;
 import com.codecool.repository.UserRepository;
 import com.codecool.security.jwt.JwtUtils;
@@ -54,21 +55,18 @@ public class UserService {
         return userRepository.findUserByEmail(email);
     }
 
-    public ResponseEntity<?> registerUser(RegisterDTO registerDTO) {
+    public void registerUser(RegisterDTO registerDTO) {
         if (!registerDTO.password().equals(registerDTO.passwordRepeat())) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
-                "Passwords do not match. Please ensure both entries are identical.");
+            throw new DuplicatedException("Passwords do not match. Please ensure both entries are identical.");
         }
         if (findByEmail(registerDTO.email()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
-                "The email address you've chosen is already registered!");
+            throw new DuplicatedException("The email address you've chosen is already registered!");
         }
 
         Role roles = roleService.findByName("ROLE_USER");
         UserEntity user = new UserEntity(registerDTO.username(), registerDTO.email(), encoder.encode(registerDTO.password()), Set.of(roles));
         create(user);
         logger.info("Registration successful! New user added with the following email address: " + registerDTO.email());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     public ResponseEntity<?> authenticateUser(SignInDTO signInDTO) {
