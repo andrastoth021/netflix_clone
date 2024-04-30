@@ -88,8 +88,7 @@ public class UserService {
             return ResponseEntity
                     .ok(new JwtResponse(jwt, userEntity.getUsername(), userEntity.getEmail(), roles));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
-                "The username and password you entered do not match. Please check your credentials and try again.");
+            throw new DuplicatedException("The username and password you entered do not match. Please check your credentials and try again.");
         }
     }
 
