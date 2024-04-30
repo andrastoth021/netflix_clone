@@ -6,6 +6,7 @@ import com.codecool.dto.SignInDTO;
 import com.codecool.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO) {
-        return userService.registerUser(registerDTO);
+    public ResponseEntity<Void> register(@RequestBody RegisterDTO registerDTO) {
+        userService.registerUser(registerDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/signin")
