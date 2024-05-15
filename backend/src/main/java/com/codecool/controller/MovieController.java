@@ -4,6 +4,7 @@ import com.codecool.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -28,6 +29,18 @@ public class MovieController {
     @GetMapping("/search/{query}")
     public ResponseEntity<?> searchMovies(@PathVariable String query) {
         return movieService.searchMovies(query);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filterMovies(
+            @RequestParam(name = "releaseFrom", required = false) Optional<Integer> releaseFrom,
+            @RequestParam(name = "releaseTo", required = false) Optional<Integer> releaseTo,
+            @RequestParam(name = "runtimeFrom", required = false) Optional<Integer> runtimeFrom,
+            @RequestParam(name = "runtimeTo", required = false) Optional<Integer> runtimeTo,
+            @RequestParam(name = "pegiFrom", required = false) Optional<Integer> pegiFrom,
+            @RequestParam(name = "pegiTo", required = false) Optional<Integer> pegiTo
+    ) {
+        return movieService.getFilteredMovie(releaseFrom, releaseTo, runtimeFrom, runtimeTo, pegiFrom, pegiTo);
     }
 
 }
