@@ -24,11 +24,10 @@ public class MovieService {
         this.categoryRepository = categoryRepository;
     }
 
-    public ResponseEntity<?> getAllMovie() {
-        Set<Movie> movieSet = movieRepository.findAllMovie();
-        Set<MovieResponse> result = new HashSet<>();
+    private List<MovieResponse> pairEachMovieWithItsCategories(List<Movie> movieList) {
+        List<MovieResponse> result = new ArrayList<>();
 
-        movieSet.forEach(movie -> {
+        movieList.forEach(movie -> {
             Set<String> categoryNames = new HashSet<>();
 
             for (Category cat : movie.getCategories()) {
@@ -88,32 +87,8 @@ public class MovieService {
     }
 
     public ResponseEntity<?> searchMovies(String searchQuery) {
-        Set<Movie> movieSet = movieRepository.findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrShortDescriptionContainingIgnoreCase(searchQuery, searchQuery, searchQuery);
-        Set<MovieResponse> result = new HashSet<>();
-
-        movieSet.forEach(movie -> {
-            Set<String> categoryNames = new HashSet<>();
-
-            for (Category cat : movie.getCategories()) {
-                Category category = categoryRepository.findCategoryById(cat.getId());
-                categoryNames.add(category.getName());
-            }
-
-            result.add(new MovieResponse(
-                    movie.getUuid(),
-                    categoryNames,
-                    movie.getTitle(),
-                    movie.getDescription(),
-                    movie.getShortDescription(),
-                    movie.getReleaseYear(),
-                    movie.getPegi(),
-                    movie.getRuntime(),
-                    movie.getPosterSrc(),
-                    movie.getBackgroundSrc(),
-                    movie.getVideoSrc()
-            ));
-        });
-
+        List<Movie> movieSet = movieRepository.findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrShortDescriptionContainingIgnoreCase(searchQuery, searchQuery, searchQuery);
+        List<MovieResponse> result = pairEachMovieWithItsCategories(movieSet);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new MultipleMovieResponse(result));
