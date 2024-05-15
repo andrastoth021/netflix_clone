@@ -36,20 +36,38 @@ public class MovieService {
             }
 
             result.add(new MovieResponse(
-                movie.getUuid(),
-                categoryNames,
-                movie.getTitle(),
-                movie.getDescription(),
-                movie.getShortDescription(),
-                movie.getReleaseYear(),
-                movie.getPegi(),
-                movie.getRuntime(),
-                movie.getPosterSrc(),
-                movie.getBackgroundSrc(),
-                movie.getVideoSrc()
+                    movie.getUuid(),
+                    categoryNames,
+                    movie.getTitle(),
+                    movie.getDescription(),
+                    movie.getShortDescription(),
+                    movie.getReleaseYear(),
+                    movie.getPegi(),
+                    movie.getRuntime(),
+                    movie.getPosterSrc(),
+                    movie.getBackgroundSrc(),
+                    movie.getVideoSrc()
             ));
         });
 
+        return result;
+    }
+
+    public ResponseEntity<?> getFilteredMovie(
+            Optional<Integer> releaseYearFrom, Optional<Integer> releaseYearTo,
+            Optional<Integer> runtimeFrom, Optional<Integer> runtimeTo,
+            Optional<Integer> pegiFrom, Optional<Integer> pegiTo
+    ){
+        List<Movie> movieList = movieRepository.findAllByFilters(releaseYearFrom, releaseYearTo, runtimeFrom, runtimeTo, pegiFrom, pegiTo);
+        List<MovieResponse> result = pairEachMovieWithItsCategories(movieList);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new MultipleMovieResponse(result));
+    }
+
+    public ResponseEntity<?> getAllMovie() {
+        List<Movie> movieSet = movieRepository.findAllMovie();
+        List<MovieResponse> result = pairEachMovieWithItsCategories(movieSet);
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(new MultipleMovieResponse(result));
