@@ -111,4 +111,20 @@ public class MovieService {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new MultipleMovieResponse(result));
     }
+
+    public ResponseEntity<?> findMostPopularMovies() {
+        List<Movie> movieSet = movieRepository.findAllByViewsOrderByViews();
+        List<MovieResponse> result = pairEachMovieWithItsCategories(movieSet);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new MultipleMovieResponse(result));
+    }
+
+    public ResponseEntity<?> findNewestMovies() {
+        List<Movie> movieSet = movieRepository.findAllByUploadedOrderByUploaded();
+        List<MovieResponse> result = pairEachMovieWithItsCategories(movieSet);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new MultipleMovieResponse(result));
+    }
 }
