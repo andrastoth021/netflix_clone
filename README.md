@@ -47,14 +47,17 @@
 
 
 
-### Built With
+### Tech stack
 
-* ![Spring Boot][Spring Boot]
-* ![PostgreSQL][PostgreSQL]
-* ![Vite(React)][Vite]
-* ![TypeScript][TypeScript]
-* ![shadcn/ui][Shadcn-UI]
-* ![TailwindCSS][TailwindCSS]
+- **Backend**
+  * ![Spring Boot][Spring Boot]
+- **Database**
+  * ![PostgreSQL][PostgreSQL]
+- **Frontend**
+  * ![Vite(React)][Vite]
+  * ![TypeScript][TypeScript]
+  * ![shadcn/ui][Shadcn-UI]
+  * ![TailwindCSS][TailwindCSS]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
