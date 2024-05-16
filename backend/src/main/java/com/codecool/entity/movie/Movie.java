@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -44,6 +45,10 @@ public class Movie {
 
     private int runtime;
 
+    private int views;
+
+    private Timestamp uploaded;
+
     @Column(name = "poster_src")
     private String posterSrc;
 
@@ -53,7 +58,7 @@ public class Movie {
     @Column(name = "video_src")
     private String videoSrc;
 
-    public Movie(UUID uuid, Set<Category> categories, String title, String description, String shortDescription, int releaseYear, int pegi, int runtime, String posterSrc, String backgroundSrc, String videoSrc) {
+    public Movie(UUID uuid, Set<Category> categories, String title, String description, String shortDescription, int releaseYear, int pegi, int runtime, int views, Timestamp uploaded, String posterSrc, String backgroundSrc, String videoSrc) {
         this.uuid = UUID.randomUUID();
         this.categories = new HashSet<>(categories);
         this.title = title;
@@ -62,6 +67,8 @@ public class Movie {
         this.releaseYear = releaseYear;
         this.pegi = pegi;
         this.runtime = runtime;
+        this.views = views;
+        this.uploaded = new Timestamp(System.currentTimeMillis());
         this.posterSrc = posterSrc;
         this.backgroundSrc = backgroundSrc;
         this.videoSrc = videoSrc;
