@@ -12,6 +12,8 @@ import {
 import {
   Home,
   ExplorePage,
+  LatestPage,
+  PopularPage,
   DetailsPage,
   SearchPage,
   ProfilePage,
@@ -36,6 +38,12 @@ const router = createBrowserRouter(createRoutesFromElements(
     </Route>
     <Route path={'/explore'} element={<Layout />}>
       <Route index element={<ExplorePage />} />
+    </Route>
+    <Route path={'/latest'} element={<Layout />}>
+      <Route index element={<LatestPage />} />
+    </Route>
+    <Route path={'/popular'} element={<Layout />}>
+      <Route index element={<PopularPage />} />
     </Route>
     <Route path={'/show/search'} element={<Layout />}>
       <Route index element={<SearchPage />} />
