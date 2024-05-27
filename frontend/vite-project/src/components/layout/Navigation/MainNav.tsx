@@ -147,10 +147,10 @@ export function MainNav({
                                         </a>
                                     </NavigationMenuLink>
                                 </li>
-                                <ListItem href="/show/latest" title="Latest">
+                                <ListItem href="/latest" title="Latest">
                                     Recent additions, featuring the most recent cinematic releases
                                 </ListItem>
-                                <ListItem href="/show/popular" title="Popular">
+                                <ListItem href="/popular" title="Popular">
                                     Most watched and highly rated movies at the moment
                                 </ListItem>
                             </ul>
