@@ -43,4 +43,13 @@ public class MovieController {
         return movieService.getFilteredMovie(releaseFrom, releaseTo, runtimeFrom, runtimeTo, pegiFrom, pegiTo);
     }
 
+    @GetMapping("/latest")
+    public ResponseEntity<?> getLatestMovies() {
+        return movieService.findNewestMovies();
+    }
+
+    @GetMapping("/popular")
+    public ResponseEntity<?> getPopularMovies() {
+        return movieService.findMostPopularMovies();
+    }
 }
